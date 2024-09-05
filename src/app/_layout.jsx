@@ -7,3 +7,4 @@ const RootLayout = () =>{
         </Stack>
      )
 }
+export
