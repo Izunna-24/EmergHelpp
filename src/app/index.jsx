@@ -1,10 +1,10 @@
 import {View,Text} from "react-native";
+import Register from "./components/register";
+import {Redirect} from "expo-router";
 
 const Home = () =>{
     return(
-        <View>
-            <Text>Welcome Page</Text>
-        </View>
+        <Redirect href={'/components/register'}/>
     )
 }
 
