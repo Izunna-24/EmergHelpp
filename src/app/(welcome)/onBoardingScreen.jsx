@@ -12,11 +12,11 @@ export default function OnBoardingScreen() {
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <Image source={logo} style={styles.logo} />
-                <Text style={styles.headerText}>Bringing health emergency response closer to you...</Text>
+                <Text style={styles.headerText}>EMERGHELP</Text>
             </View>
             <View style={styles.heroSection}>
                 <Image source={illustration} style={styles.illustration} />
-                <Text style={styles.heroText}>Fast, reliable, and efficient medical assistance at your fingertips.</Text>
+                <Text style={styles.heroText}>Bringing health emergency response closer and on time</Text>
             </View>
             <View style={styles.buttonColumn}>
                 <TouchableOpacity
@@ -44,23 +44,21 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1,
-        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20,
         marginBottom: 15,
     },
     logo: {
-        width: 50,
-        height: 50,
-        marginRight: 8,
+        width: 70,
+        height: 70,
+        marginBottom: 8,
     },
     headerText: {
         color: '#00796B',
-        fontSize: 18,
+        fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
-        paddingHorizontal: 10,
     },
     heroSection: {
         flex: 3,
