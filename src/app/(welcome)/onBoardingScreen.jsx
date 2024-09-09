@@ -1,71 +1,109 @@
-import React, { useRef, useEffect } from 'react';
-import { View, Animated, Easing, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import logo from '../../assets/img/logo.png';
+import illustration from '../../assets/img/illustration (2).png';
 import { useRouter } from 'expo-router';
 
 export default function OnBoardingScreen() {
-    const scaleAnim = useRef(new Animated.Value(1)).current;
     const router = useRouter();
-
-    useEffect(() => {
-        Animated.loop(
-            Animated.sequence([
-                Animated.timing(scaleAnim, {
-                    toValue: 1.2,
-                    duration: 1000,
-                    easing: Easing.inOut(Easing.ease),
-                    useNativeDriver: true,
-                }),
-                Animated.timing(scaleAnim, {
-                    toValue: 1,
-                    duration: 1000,
-                    easing: Easing.inOut(Easing.ease),
-                    useNativeDriver: true,
-                }),
-            ])
-        ).start();
-    }, [scaleAnim]);
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.headerText}>Bringing health emergency response closer to you...</Text>
-            <View style={styles.content}>
-                <Animated.Image
-                    source={logo}
-                    style={[styles.logo, { transform: [{ scale: scaleAnim }] }]}
-                />
-                <View style={styles.footerContainer}>
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.textContainer} onPress={() => router.push('/sign-in')}>
-                            <Text style={styles.getStartedText}>SIGN-UP</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.textContainer} onPress={() => router.push('/become-a-medic')}>
-                            <Text style={styles.getStartedText}>BECOME A MEDIC</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+            <View style={styles.header}>
+                <Image source={logo} style={styles.logo} />
+                <Text style={styles.headerText}>Bringing health emergency response closer to you...</Text>
+            </View>
+            <View style={styles.heroSection}>
+                <Image source={illustration} style={styles.illustration} />
+                <Text style={styles.heroText}>Fast, reliable, and efficient medical assistance at your fingertips.</Text>
+            </View>
+            <View style={styles.buttonColumn}>
+                <TouchableOpacity
+                    style={[styles.button, styles.shadow]}
+                    onPress={() => router.push('/sign-in')}
+                >
+                    <Text style={styles.buttonText}>SIGN-UP</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.button, styles.shadow]}
+                    onPress={() => router.push('/become-a-medic')}
+                >
+                    <Text style={styles.buttonText}>BECOME A MEDIC</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#DD4C49' },
+    container: {
+        flex: 1,
+        backgroundColor: '#E0F7FA',
+        paddingHorizontal: 15,
+        justifyContent: 'center',
+    },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 20,
+        marginBottom: 15,
+    },
+    logo: {
+        width: 50,
+        height: 50,
+        marginRight: 8,
+    },
     headerText: {
-        position: 'absolute', top: 20, width: '100%', color: 'white',
-        fontSize: 18, fontWeight: 'bold', textAlign: 'center',
-        paddingHorizontal: 10, paddingVertical: 5, textShadowColor: 'rgba(0, 0, 0, 0.5)',
-        textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 4,
+        color: '#00796B',
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        paddingHorizontal: 10,
     },
-    content: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-    logo: { width: 400, height: 400 },
-    footerContainer: { position: 'absolute', bottom: 20, width: '100%', alignItems: 'center' },
-    buttonContainer: { flexDirection: 'row', justifyContent: 'space-between', width: '100%' },
-    textContainer: {
-        backgroundColor: 'white', padding: 15, borderRadius: 10,
-        shadowColor: '#000', shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.3, shadowRadius: 5, elevation: 5, marginHorizontal: 10
+    heroSection: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 30,
     },
-    getStartedText: { color: 'red', fontSize: 20, fontWeight: 'bold', textAlign: 'center' }
+    illustration: {
+        width: 250,
+        height: 150,
+        marginBottom: 15,
+    },
+    heroText: {
+        color: '#00796B',
+        fontSize: 16,
+        fontWeight: '500',
+        textAlign: 'center',
+        paddingHorizontal: 15,
+    },
+    buttonColumn: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 20,
+    },
+    button: {
+        backgroundColor: '#4CAF50',
+        paddingVertical: 12,
+        paddingHorizontal: 50,
+        borderRadius: 25,
+        marginVertical: 10,
+        width: '80%',
+    },
+    buttonText: {
+        color: '#FFF',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    shadow: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 6,
+    },
 });
