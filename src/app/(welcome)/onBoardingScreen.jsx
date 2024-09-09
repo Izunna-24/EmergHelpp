@@ -21,13 +21,13 @@ export default function OnBoardingScreen() {
             <View style={styles.buttonColumn}>
                 <TouchableOpacity
                     style={[styles.button, styles.shadow]}
-                    onPress={() => router.push('/sign-in')}
+                    onPress={() => router.push('/screens/orderMedic')}
                 >
                     <Text style={styles.buttonText}>SIGN-UP</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.button, styles.shadow]}
-                    onPress={() => router.push('/become-a-medic')}
+                    onPress={() => router.push('/screens/acceptOrder')}
                 >
                     <Text style={styles.buttonText}>BECOME A MEDIC</Text>
                 </TouchableOpacity>
@@ -41,9 +41,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#E0F7FA',
         paddingHorizontal: 15,
-        justifyContent: 'center',
     },
     header: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -63,27 +63,29 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     heroSection: {
+        flex: 3,
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 30,
     },
     illustration: {
-        width: 250,
-        height: 150,
-        marginBottom: 15,
+        width: 300,
+        height: 200,
+        marginBottom: 20,
     },
     heroText: {
         color: '#00796B',
         fontSize: 16,
         fontWeight: '500',
         textAlign: 'center',
-        paddingHorizontal: 15,
+        paddingHorizontal: 20,
     },
     buttonColumn: {
+        flex: 1,
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 20,
+        justifyContent: 'space-between',
+        marginBottom: 30,
     },
     button: {
         backgroundColor: '#4CAF50',
