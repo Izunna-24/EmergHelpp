@@ -1,11 +1,8 @@
-import {View,Text} from "react-native";
+import {Redirect} from "expo-router";
 
-const Home = () =>{
+const Index = () =>{
     return(
-        <View>
-            <Text>Welcome Page</Text>
-        </View>
+        <Redirect href={'(welcome)/onBoardingScreen'}/>
     )
 }
-
-export default Home;
+export default Index;
