@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import {
+    View,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    StyleSheet,
+    Alert,
+    Modal,
+    TouchableWithoutFeedback
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
@@ -18,6 +27,9 @@ const RegisterMedic = () => {
     const [specialization, setSpecialization] = useState("");
     const [submitted, setSubmitted] = useState(false);
 
+    const [isPickerVisible, setIsPickerVisible] = useState(false);
+
+
     const handleBecomeAMedicClick = () => {
         if (firstName && lastName && gender && phoneNumber && email && specialization && password) {
             setSubmitted(true);
@@ -27,6 +39,16 @@ const RegisterMedic = () => {
         }
     };
 
+
+    const handleGenderSelect = (selectedGender) => {
+        setGender(selectedGender);
+        setIsPickerVisible(false);
+    };
+
+    const handleSpecializationSelect = (selectedSpecialization) => {
+        selectedSpecialization(selectedSpecialization);
+        setIsPickerVisible(false);
+    };
 
     return (
         <View style={styles.container}>
@@ -48,19 +70,65 @@ const RegisterMedic = () => {
                     placeholderTextColor={"black"}
                 />
 
-                <View style={styles.input}>
-                    <Text>Gender</Text>
-                    <Picker
-                        SelectedValue = {gender}
-                        style={styles.picker}
-                        onValueChange={(itemValue) => setGender(itemValue)}
-                    >
-                        <Picker.Item label="Select Gender" value=""/>
-                        <Picker.Item label="Male" value = "Male"/>
-                        <Picker.Item label="Female" value = "Female" />
+                <TouchableOpacity
+                    style={styles.input}
+                    onPress={() => setIsPickerVisible(true)}
+                >
+                    <Text style={{ color: specialization ? 'black' : '#999' }}>
+                        {specialization ? specialization : "Select Specialization"}
+                    </Text>
+                </TouchableOpacity>
 
-                    </Picker>
-                </View>
+                <Modal
+                    transparent={true}
+                    visible={isPickerVisible}
+                    animationType="slide"
+                    onRequestClose={() => setIsPickerVisible(false)}
+                >
+                    <TouchableWithoutFeedback onPress={() => setIsPickerVisible(false)}>
+                        <View style={styles.modalOverlay}>
+                            <View style={styles.pickerContainer}>
+                                <TouchableOpacity
+                                    style={styles.pickerOption}
+                                    onPress={() => handleSpecializationSelect("cardiology")}
+                                >
+                                    <Text style={styles.pickerOptionText}>Cardiology</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.pickerOption}
+                                    onPress={() => handleSpecializationSelect("neurology")}
+                                >
+                                    <Text style={styles.pickerOptionText}>Neurology</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.pickerOption}
+                                    onPress={() => handleSpecializationSelect("Pediatrics")}
+                                >
+                                    <Text style={styles.pickerOptionText}>Pediatrics</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.pickerOption}
+                                    onPress={() => handleSpecializationSelect("orthopedics")}
+                                >
+                                    <Text style={styles.pickerOptionText}>Orthopedics</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.pickerOption}
+                                    onPress={() => handleSpecializationSelect("Nurse")}
+                                >
+                                    <Text style={styles.pickerOptionText}>Nurse</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.pickerOption}
+                                    onPress={() => handleSpecializationSelect("Lab Scientist")}
+                                >
+                                    <Text style={styles.pickerOptionText}>Lab Scientist</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </Modal>
+
 
                 <TextInput
                     placeholder="Phone Number"
@@ -79,26 +147,26 @@ const RegisterMedic = () => {
                     placeholderTextColor={"black"}
                 />
 
-                <View style={styles.input}>
-                    <Text>Specialization</Text>
-                    <Picker
-                        SelectedValue = {specialization}
-                        style={styles.picker}
-                        onValueChange={(itemValue) => setSpecialization(itemValue)}
-                    >
-                        <Picker.Item label="Select Specialization" value=""/>
-                        <Picker.Item label="cardiology" value = "cardiology"/>
-                        <Picker.Item label="neurology" value = "neurology" />
-                        <Picker.Item label="orthopedics" value = "orthopedics" />
-                        <Picker.Item label="Pediatrics" value = "Pediatrics" />
-                        <Picker.Item label="Nurse" value = "Nurse" />
-                        <Picker.Item label="Lab Scientist" value = "Lab Scientist" />
-                        <Picker.Item label="Para Medic" value = "Para Medic" />
-                        <Picker.Item label="Optometrist" value = "Optometrist" />
-                        <Picker.Item label="Doctor" value="Doctor"/>
-                        <Picker.Item label="Surgeon" value="Surgeon"/>
-                    </Picker>
-                </View>
+                {/*<View style={styles.input}>*/}
+                {/*    <Text>Specialization</Text>*/}
+                {/*    <Picker*/}
+                {/*        SelectedValue = {specialization}*/}
+                {/*        style={styles.picker}*/}
+                {/*        onValueChange={(itemValue) => setSpecialization(itemValue)}*/}
+                {/*    >*/}
+                {/*        <Picker.Item label="Select Specialization" value=""/>*/}
+                {/*        <Picker.Item label="cardiology" value = "cardiology"/>*/}
+                {/*        <Picker.Item label="neurology" value = "neurology" />*/}
+                {/*        <Picker.Item label="orthopedics" value = "orthopedics" />*/}
+                {/*        <Picker.Item label="Pediatrics" value = "Pediatrics" />*/}
+                {/*        <Picker.Item label="Nurse" value = "Nurse" />*/}
+                {/*        <Picker.Item label="Lab Scientist" value = "Lab Scientist" />*/}
+                {/*        <Picker.Item label="Para Medic" value = "Para Medic" />*/}
+                {/*        <Picker.Item label="Optometrist" value = "Optometrist" />*/}
+                {/*        <Picker.Item label="Doctor" value="Doctor"/>*/}
+                {/*        <Picker.Item label="Surgeon" value="Surgeon"/>*/}
+                {/*    </Picker>*/}
+                {/*</View>*/}
 
                 <TextInput
                     placeholder="Password"

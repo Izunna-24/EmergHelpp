@@ -28,7 +28,7 @@ const Register = () => {
     const handleBecomeAMedicClick = () => {
         if (firstName && lastName && gender && phoneNumber && email && password) {
             setSubmitted(false);
-            navigation.navigate('medicRegister');
+            navigation.navigate('Dashboard');
         }
         // else {
         //     Alert.alert("Error", "Please fill in all the fields before submitting!");
@@ -63,7 +63,7 @@ const Register = () => {
 
                 <TouchableOpacity
                     style={styles.input}
-                    onPress={() => setIsPickerVisible(true)} // Show dropdown on press
+                    onPress={() => setIsPickerVisible(true)}
                 >
                     <Text style={{ color: gender ? 'black' : '#999' }}>
                         {gender ? gender : "Select Gender"}
@@ -138,7 +138,7 @@ const Register = () => {
                     onPress={() => navigation.goBack()}
                     style={styles.backLink}
                 >
-                    <AntDesign name="arrowleft" size={16} color="#ff8381" />
+                    <AntDesign name="arrowleft" size={16} color="black" />
                     <Text style={styles.backText}>Back</Text>
                 </TouchableOpacity>
 
@@ -203,14 +203,14 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     button: {
-        backgroundColor: '#ff8381',
+        backgroundColor: '#E0F7FA',
         paddingVertical: 12,
         borderRadius: 5,
         alignItems: 'center',
         marginTop: 10,
     },
     buttonText: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
     },
     successMessage: {
@@ -227,25 +227,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20,
+
     },
     backText: {
-        color: '#ff8381',
+        color: 'black',
         marginLeft: 8,
     },
     footerText: {
         textAlign: 'center',
         marginTop: 20,
-        color: '#ff8381',
+        color: 'black',
         fontWeight: 'bold',
     },
     dashboardLink: {
-        color: '#ff8381',
+        color: 'black',
+        fontWeight: 'normal',
         textDecorationLine: 'underline',
         marginLeft: 4,
     },
 
     medicRegisterLink:{
-        color: '#ff8381',
+        color: 'black',
+        fontWeight: 'normal',
         textDecorationLine: 'underline',
         marginLeft: 4,
     },
