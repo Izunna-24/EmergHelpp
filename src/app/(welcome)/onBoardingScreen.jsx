@@ -1,31 +1,18 @@
-import React, { useRef, useEffect } from 'react';
-import { View, Animated, Easing, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+// import React from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import logo from '../../assets/img/logo.png';
+import illustration from '../../assets/img/illustration (2).png';
 import { useRouter } from 'expo-router';
+import { Animated } from 'react-native';
+import React, { useRef, useEffect } from 'react';
+
+
 
 export default function OnBoardingScreen() {
-    const scaleAnim = useRef(new Animated.Value(1)).current;
     const router = useRouter();
+    const scaleAnim = useRef(new Animated.Value(1)).current;
 
-    useEffect(() => {
-        Animated.loop(
-            Animated.sequence([
-                Animated.timing(scaleAnim, {
-                    toValue: 1.2,
-                    duration: 1000,
-                    easing: Easing.inOut(Easing.ease),
-                    useNativeDriver: true,
-                }),
-                Animated.timing(scaleAnim, {
-                    toValue: 1,
-                    duration: 1000,
-                    easing: Easing.inOut(Easing.ease),
-                    useNativeDriver: true,
-                }),
-            ])
-        ).start();
-    }, [scaleAnim]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -51,21 +38,75 @@ export default function OnBoardingScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#DD4C49' },
+    container: {
+        flex: 1,
+        backgroundColor: '#E0F7FA',
+        paddingHorizontal: 15,
+    },
+    header: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 20,
+        marginBottom: 15,
+    },
+    logo: {
+        width: 50,
+        height: 50,
+        marginRight: 8,
+    },
     headerText: {
-        position: 'absolute', top: 20, width: '100%', color: 'white',
-        fontSize: 18, fontWeight: 'bold', textAlign: 'center',
-        paddingHorizontal: 10, paddingVertical: 5, textShadowColor: 'rgba(0, 0, 0, 0.5)',
-        textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 4,
+        color: '#00796B',
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        paddingHorizontal: 10,
     },
-    content: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-    logo: { width: 400, height: 400 },
-    footerContainer: { position: 'absolute', bottom: 20, width: '100%', alignItems: 'center' },
-    buttonContainer: { flexDirection: 'row', justifyContent: 'space-between', width: '100%' },
-    textContainer: {
-        backgroundColor: 'white', padding: 15, borderRadius: 10,
-        shadowColor: '#000', shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.3, shadowRadius: 5, elevation: 5, marginHorizontal: 10
+    heroSection: {
+        flex: 3,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 30,
     },
-    getStartedText: { color: 'red', fontSize: 20, fontWeight: 'bold', textAlign: 'center' }
+    illustration: {
+        width: 300,
+        height: 200,
+        marginBottom: 20,
+    },
+    heroText: {
+        color: '#00796B',
+        fontSize: 16,
+        fontWeight: '500',
+        textAlign: 'center',
+        paddingHorizontal: 20,
+    },
+    buttonColumn: {
+        flex: 1,
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 30,
+    },
+    button: {
+        backgroundColor: '#4CAF50',
+        paddingVertical: 12,
+        paddingHorizontal: 50,
+        borderRadius: 25,
+        marginVertical: 10,
+        width: '80%',
+    },
+    buttonText: {
+        color: '#FFF',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    shadow: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 6,
+    },
 });

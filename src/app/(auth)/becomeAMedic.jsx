@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
-import { Picker } from '@react-native-picker/picker';
+
 
 
 const RegisterMedic = () => {
@@ -28,6 +28,7 @@ const RegisterMedic = () => {
     const [submitted, setSubmitted] = useState(false);
 
     const [isPickerVisible, setIsPickerVisible] = useState(false);
+    const [isSpecializationPickerVisible, setIsSpecializationPickerVisible] = useState(false);
 
 
     const handleBecomeAMedicClick = () => {
@@ -46,8 +47,8 @@ const RegisterMedic = () => {
     };
 
     const handleSpecializationSelect = (selectedSpecialization) => {
-        selectedSpecialization(selectedSpecialization);
-        setIsPickerVisible(false);
+        setSpecialization(selectedSpecialization);
+        setIsSpecializationPickerVisible(false);
     };
 
     return (
@@ -74,10 +75,11 @@ const RegisterMedic = () => {
                     style={styles.input}
                     onPress={() => setIsPickerVisible(true)}
                 >
-                    <Text style={{ color: specialization ? 'black' : '#999' }}>
-                        {specialization ? specialization : "Select Specialization"}
+                    <Text style={{ color: gender ? 'black' : '#999' }}>
+                        {gender ? gender : "Select Gender"}
                     </Text>
                 </TouchableOpacity>
+
 
                 <Modal
                     transparent={true}
@@ -90,13 +92,49 @@ const RegisterMedic = () => {
                             <View style={styles.pickerContainer}>
                                 <TouchableOpacity
                                     style={styles.pickerOption}
-                                    onPress={() => handleSpecializationSelect("cardiology")}
+                                    onPress={() => handleGenderSelect("Male")}
+                                >
+                                    <Text style={styles.pickerOptionText}>Male</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.pickerOption}
+                                    onPress={() => handleGenderSelect("Female")}
+                                >
+                                    <Text style={styles.pickerOptionText}>Female</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </Modal>
+
+
+                <TouchableOpacity
+                    style={styles.input}
+                    onPress={() => setIsSpecializationPickerVisible(true)} // Opens specialization modal
+                >
+                    <Text style={{ color: specialization ? 'black' : '#999' }}>
+                        {specialization ? specialization : "Select Specialization"}
+                    </Text>
+                </TouchableOpacity>
+
+                <Modal
+                    transparent={true}
+                    visible={isSpecializationPickerVisible}
+                    animationType="slide"
+                    onRequestClose={() => setIsSpecializationPickerVisible(false)}
+                >
+                    <TouchableWithoutFeedback onPress={() => setIsSpecializationPickerVisible(false)}>
+                        <View style={styles.modalOverlay}>
+                            <View style={styles.pickerContainer}>
+                                <TouchableOpacity
+                                    style={styles.pickerOption}
+                                    onPress={() => handleSpecializationSelect("Cardiology")}
                                 >
                                     <Text style={styles.pickerOptionText}>Cardiology</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={styles.pickerOption}
-                                    onPress={() => handleSpecializationSelect("neurology")}
+                                    onPress={() => handleSpecializationSelect("Neurology")}
                                 >
                                     <Text style={styles.pickerOptionText}>Neurology</Text>
                                 </TouchableOpacity>
@@ -108,7 +146,7 @@ const RegisterMedic = () => {
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={styles.pickerOption}
-                                    onPress={() => handleSpecializationSelect("orthopedics")}
+                                    onPress={() => handleSpecializationSelect("Orthopedics")}
                                 >
                                     <Text style={styles.pickerOptionText}>Orthopedics</Text>
                                 </TouchableOpacity>
@@ -129,7 +167,6 @@ const RegisterMedic = () => {
                     </TouchableWithoutFeedback>
                 </Modal>
 
-
                 <TextInput
                     placeholder="Phone Number"
                     value={phoneNumber}
@@ -146,27 +183,6 @@ const RegisterMedic = () => {
                     style={styles.input}
                     placeholderTextColor={"black"}
                 />
-
-                {/*<View style={styles.input}>*/}
-                {/*    <Text>Specialization</Text>*/}
-                {/*    <Picker*/}
-                {/*        SelectedValue = {specialization}*/}
-                {/*        style={styles.picker}*/}
-                {/*        onValueChange={(itemValue) => setSpecialization(itemValue)}*/}
-                {/*    >*/}
-                {/*        <Picker.Item label="Select Specialization" value=""/>*/}
-                {/*        <Picker.Item label="cardiology" value = "cardiology"/>*/}
-                {/*        <Picker.Item label="neurology" value = "neurology" />*/}
-                {/*        <Picker.Item label="orthopedics" value = "orthopedics" />*/}
-                {/*        <Picker.Item label="Pediatrics" value = "Pediatrics" />*/}
-                {/*        <Picker.Item label="Nurse" value = "Nurse" />*/}
-                {/*        <Picker.Item label="Lab Scientist" value = "Lab Scientist" />*/}
-                {/*        <Picker.Item label="Para Medic" value = "Para Medic" />*/}
-                {/*        <Picker.Item label="Optometrist" value = "Optometrist" />*/}
-                {/*        <Picker.Item label="Doctor" value="Doctor"/>*/}
-                {/*        <Picker.Item label="Surgeon" value="Surgeon"/>*/}
-                {/*    </Picker>*/}
-                {/*</View>*/}
 
                 <TextInput
                     placeholder="Password"
@@ -193,7 +209,7 @@ const RegisterMedic = () => {
                     onPress={() => navigation.goBack()}
                     style={styles.backLink}
                 >
-                    <AntDesign name="arrowleft" size={16} color="#ff8381" />
+                    <AntDesign name="arrowleft" size={16} color="black" />
                     <Text style={styles.backText}>Back</Text>
                 </TouchableOpacity>
 
@@ -213,12 +229,11 @@ const RegisterMedic = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 2,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#f3f3f3',
         padding: 40,
-        height: 20,
     },
     card: {
         backgroundColor: 'white',
@@ -244,27 +259,45 @@ const styles = StyleSheet.create({
         color: 'black',
         borderWidth: 1,
         borderRadius: 5,
-        padding: 12,
+        padding: 15,
+        width: '100%',
         marginBottom: 12,
     },
 
-    picker: {
-        height: 50,
-        width: '100%',
+    modalOverlay: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',  // Semi-transparent background
+    },
+    pickerContainer: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 20,
+        width: '80%',  // Adjust to your liking
+        maxWidth: 300, // Optional: max width for larger screens
+        alignItems: 'center',  // Center picker options horizontally
+    },
+    pickerOption: {
+        padding: 15,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+        width: '100%',  // Make option take full width of picker container
+    },
+    pickerOptionText: {
+        fontSize: 18,
+        textAlign: 'center',
     },
 
-    selectInput: {
-        flex: 1,
-    },
     button: {
-        backgroundColor: '#ff8381',
+        backgroundColor: '#E0F7FA',
         paddingVertical: 12,
         borderRadius: 5,
         alignItems: 'center',
         marginTop: 10,
     },
     buttonText: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
     },
     successMessage: {
@@ -281,19 +314,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20,
+        color: 'black',
     },
     backText: {
-        color: '#ff8381',
+        color: 'black',
         marginLeft: 8,
     },
     footerText: {
         textAlign: 'center',
         marginTop: 20,
-        color: '#ff8381',
+        color: 'black',
         fontWeight: 'bold',
     },
     dashboardLink: {
-        color: '#ff8381',
+        color: 'black',
         textDecorationLine: 'underline',
         marginLeft: 4,
     },

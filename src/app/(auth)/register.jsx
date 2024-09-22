@@ -25,16 +25,6 @@ const Register = () => {
         }
     };
 
-    const handleBecomeAMedicClick = () => {
-        if (firstName && lastName && gender && phoneNumber && email && password) {
-            setSubmitted(false);
-            navigation.navigate('Dashboard');
-        }
-        // else {
-        //     Alert.alert("Error", "Please fill in all the fields before submitting!");
-        // }
-    };
-
     const handleGenderSelect = (selectedGender) => {
         setGender(selectedGender);
         setIsPickerVisible(false);
@@ -60,7 +50,6 @@ const Register = () => {
                     placeholderTextColor={"black"}
                 />
 
-
                 <TouchableOpacity
                     style={styles.input}
                     onPress={() => setIsPickerVisible(true)}
@@ -69,7 +58,6 @@ const Register = () => {
                         {gender ? gender : "Select Gender"}
                     </Text>
                 </TouchableOpacity>
-
 
                 <Modal
                     transparent={true}
@@ -121,6 +109,7 @@ const Register = () => {
                     style={styles.input}
                     placeholderTextColor={"black"}
                 />
+
                 <TouchableOpacity
                     style={styles.button}
                     onPress={handleSetProfileClick}
@@ -152,7 +141,6 @@ const Register = () => {
                     </Text>
                 </Text>
 
-
                 <Text style={styles.footerText}>
                     Want to be a part of our team?
                     <Text
@@ -177,15 +165,14 @@ const styles = StyleSheet.create({
     },
     card: {
         backgroundColor: 'white',
-        padding: 16,
+        padding: 20,
         borderRadius: 10,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 3,
         elevation: 4,
-        width: '100%',
-        height: '80%',
+        width: '90%',
         maxWidth: 400,
     },
     title: {
@@ -199,8 +186,9 @@ const styles = StyleSheet.create({
         color: 'black',
         borderWidth: 1,
         borderRadius: 5,
-        padding: 12,
+        padding: 15,
         marginBottom: 12,
+        width: '100%',
     },
     button: {
         backgroundColor: '#E0F7FA',
@@ -208,6 +196,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         alignItems: 'center',
         marginTop: 10,
+        width: '100%',
     },
     buttonText: {
         color: 'black',
@@ -227,7 +216,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 20,
-
     },
     backText: {
         color: 'black',
@@ -245,8 +233,7 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
         marginLeft: 4,
     },
-
-    medicRegisterLink:{
+    medicRegisterLink: {
         color: 'black',
         fontWeight: 'normal',
         textDecorationLine: 'underline',
@@ -273,7 +260,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: 'center',
     },
-
 });
 
 export default Register;

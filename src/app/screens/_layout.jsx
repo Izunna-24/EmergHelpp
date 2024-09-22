@@ -9,7 +9,7 @@ const RootLayout = () => {
             <Stack.Screen name='acceptOrder'  />
             <Stack.Screen name='orderMedic'  />
             {/*<Stack.Screen name='(tabs)'  />*/}
-            {/*<Stack.Screen name='(auth)'  />*/}
+            <Stack.Screen name='(auth)'  />
         </Stack>
     )
 }
